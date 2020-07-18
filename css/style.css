@@ -1,0 +1,132 @@
+/* .box{
+    background: blue;
+    width: 200px;
+    height: 200px;
+    font-size: 20px;
+    display: inline-block;
+    color: aliceblue;
+    
+}/*
+
+/* inline 은 element다 그래서 높이와 너비를 가질수 없다 */
+/* 자세히 보면 inline-block 은 우리가 마진을 따로 주지 않아도 공간이 생긴다 */
+/* .box:nth-child(2){
+    margin-left: 50px;
+} */
+
+
+/* .box:nth-child(3){
+    margin-left: 40px;
+} */
+
+/* 그냥 막무가내로 픽셀 단위로 정하게 되면 반응형 에서 디자인이 파괴된다 그렇기에 우린 
+flexbox가 나온것이다*/
+
+/*각 기술이 왜 생긴것인가(문제점을 알고), 그 기술을 보완하려는 기술을 알고, 그리고 어떻게 해결하였는지를 공부하고 하는것이 중요*/
+/* 왜 배워야 하는지를 알아야한다.*/
+
+/*flexbox는 child와 소통 하지 않는다. flexbox container을 만들어야 함 안의 속성 들을 움직일때는*/
+/*즉 box요소를 그냥 옮길수는 없고 flexbox container를 사용하여 box요소를 담아야 정렬이 가능하다 */
+/*flex container가 다른것이 아니라 그냥 내가 움직이고자 하는 자식요소가 담겨있는 프로퍼티 이다*/
+
+/*body부분이 부모 요소로 인식이 되니 flex적용됨*/
+
+/*flexbox의 기본은 row 수평 이다. 그래서 박스가 수평으로 있다.*/
+.fuck{
+    display: flex;
+    /* flex-direction: column-reverse; */
+    /* flex direction 이 axis를 나타낸다 즉 기준점이 되므로 row를 할때는 기본적인 방향 이지만*/
+    /* column을 하게되면 한줄 모양으로 바뀌게 되는데 잘보면 기준점 이동이기에 당연한 배치가 된다. 직접 해보는게 좋음 */
+    
+
+
+    /* main-axis */
+    justify-content: space-around;
+    /* align-content: space-between; */
+    align-content: center;
+    /* cross-axis */
+    /* align-items: stretch; */
+    /* stretch는 쭉 길어지는 건데 main-axis를 기준으로 길어진다. cloumn은 가로로 길어지고 row는 세로로 길어짐 왜냐면 align이니까 */
+    width: 500px;
+    height: 500px;
+    /* width: 100vh; */
+    /* 중요한건 height다 왜냐면 main axis기준으로 height가 결정 되므로 설정을 잘 해줘야 원하는 결과가 나온다. */
+
+    flex-wrap:no-wrap;
+    /* flex-wrap 즉 배치를 할때 크기를 유지하라. 이렇게 하면
+    child 각자의 크기를 유지해야 하니 전체의 크기가 줄어들면 줄바꿈이 일어나서 내려 가게 되거나 가운데로 가게 되겠지. 
+    기본은 no-wrap이다.*/
+
+    /* wrap-reverse 도 있는데 이건 기본값에서 반대이다 이게 
+    wrap하면 크기줄였을때 아래로 가고 리버스 하면 위로감 기준은 align기준으로 왔다갔다 한다.*/
+
+    /* 여기서 생각해 보자 부모 요소에서 align content 는 각각의 box가 되는것이다.
+    그렇다면 center를 하면? 전체 크기에서 중간에 오는것이고 start를 하면 각자가 제일 첫번째 열에 정렬이 되는것이다.
+    wrap에서 생기는 공백을 줄일수 있다. */
+    align-content: space-between;
+
+    /* 위에서 언급했다싶히 align-content는 cross-axis에서 작용한다.
+    즉 기준이 되는 기본 정렬의 수평,수직 값에서의 반대 cross-axis를 기준으로
+    왔다 갔다 하는것. */
+
+}
+
+/*justify-content 는 main-axis 즉 중심선이 가로이다 그렇기에 가로로 뭔가를 배치를 할때 사용이되고,
+align은 main-axis가 세로 이다 그렇기에 수직으로 배치를 할때, 수직으로 있는것을 배치할때 사용된다.*/
+
+/* flex박스는 자식 요소들이 찌그러 지는 것은 신경 쓰지 않는다 단지 한 라인에 다 유지 시켜 넣는것이 목적이기에
+flex-direction이 기본값일때 width가 줄어드는 현상이 일어난다. */
+.box{
+    flex-basis: 100%;
+    height: 200px;
+    background: red;
+    color: white;
+    font-size: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+/* flex-basis는 element에게 처음 크기를 주는것이다. 
+이게 width지 뭐냐 할수 있다. 하지만 큰 차이가 있다. flex는 항상 유동적으로 적용된다고 생각하면된다.
+main-axis기준으로 그러므로 flex-direction이 cloumn일때 flex-basis는 width가 아닌 height가 된다.
+또한 절대값 px이 아닌 %,vh 로도 사용가능하다.
+니콜라스 왜 커지는지는 한번 집에 가서 보자 1.7 챕터 이다.*/
+
+.box:nth-child(1){
+    background: black;
+    
+    
+}
+
+
+.box:nth-child(2){
+    background: red;
+    
+    flex-grow: 0;
+}
+.box:nth-child(3){
+    background: blue;
+    
+}
+
+/* flex-grow는 빈공간을 차지하며 커지는 프로퍼티 이다. 그렇기에 꽉채워져 있을때
+아무리 늘려도 빈공간을 다 먹으면 변하지 않는다. 기본값은 0이며 기준은 빈공간을 먹으며 크는것
+근데 그렇다면 크기를 높히는게 무슨소용인가 하겠지만, 다른 child의 grow크기에 또 비례하기 때문에 
+필요한 속성값이다. 보통 1, 0 을 설정한다. 
+계산식은 남은공간 을 총지수로 나눈뒤 그것의 비율만큼 가져간다.*/
+
+/* flex-shrink 요소는 shrink 즉 수축과 관련된 child 프로퍼티 이다. 기본값은 1 이며 0이되면 no-wrap일때 
+container크기를 줄여도 본 크기를 유지하며 1 인 경우에는 균등 2인경우에는 2배로 수축을 한다. 이때의 기준점은 
+container가 줄어들때 각 수축하는 정도에서의 배수 값이다.  
+즉 기준은 container 기준이다.*/
+
+/* flex-grow, flex-shrink 는 반응형을 쓸때 유용한다. */
+
+/* order: 0; 요소는 기본적으로 0이 default다 여기서 order는 각각의 순서를 지정하는데 
+예를 들어 nth(2),order(2)인 경우 2번째 요소에 순서가 2번째 라는것을 부여한다.
+결과적으로 나머지는 요소는 0이니 1,3,2 순서로 배치된다. 즉 order는 순번표 같은 것이다.
+나머지보다 크면 뒤로가고 나머지 보다 작으면 앞으로 가므로 '-'값도 적용이 된다.
+나는 절대적인 기준에서 바뀌는 줄 알았는데 상대적으로 바뀌는 것이어서 오해를 했었다.
+css에서는 상대적 기준으로 배치가 된다. */
+/* 분명 flex를 수정하기 위해서는 부모 속성에서 수정을 해주어야 한다. 하지만 자식 속성에서도 수정이 가능한데
+이때 사용하는게 align-self이다. */
